@@ -1,0 +1,76 @@
+/* Static HTML adaptation of Creative Tim UI / shadcn primitives.
+   Source: https://github.com/creativetimofficial/ui
+   MIT license: licenses/creative-tim-ui-LICENSE.md
+   Native elements replace React/Radix runtime behavior for this local page. */
+@font-face {
+  font-family: "Geist";
+  src: url("fonts/Geist-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+:root {
+  --ui-radius: 10px;
+  --ui-card: #ffffff;
+  --ui-card-foreground: #181c24;
+  --ui-border: #dfe3eb;
+  --ui-primary: #181c24;
+  --ui-primary-foreground: #ffffff;
+  --ui-secondary: #f1f3f7;
+  --ui-muted-foreground: #606878;
+  --ui-ring: #2856d8;
+  --ui-shadow-sm: 0 1px 3px rgb(24 28 36 / 5%);
+}
+/* card.tsx: Card > CardHeader + CardContent + CardFooter */
+.ui-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-block: 24px;
+  border: 1px solid var(--ui-border);
+  border-radius: calc(var(--ui-radius) + 2px);
+  background: var(--ui-card);
+  color: var(--ui-card-foreground);
+  box-shadow: var(--ui-shadow-sm);
+}
+.ui-card > [data-slot="card-header"] { display: grid; gap: 8px; padding-inline: 24px; }
+.ui-card > [data-slot="card-content"] { padding-inline: 24px; }
+.ui-card > [data-slot="card-footer"] { display: flex; align-items: center; padding-inline: 24px; margin-top: auto; }
+/* button.tsx: primary, outline and link variants. Touch targets are enlarged to 48px. */
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: calc(var(--ui-radius) - 4px);
+  background: var(--ui-primary);
+  color: var(--ui-primary-foreground);
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  transition: background .18s, border-color .18s, color .18s;
+}
+.ui-button:hover { background: #303744; }
+.ui-button[data-variant="outline"] { border-color: var(--ui-border); background: var(--ui-card); color: var(--ui-card-foreground); box-shadow: 0 1px 2px rgb(24 28 36 / 4%); }
+.ui-button[data-variant="outline"]:hover { background: var(--ui-secondary); }
+.ui-button:disabled { pointer-events: none; opacity: .5; }
+.ui-button .icon { width: 16px; height: 16px; }
+.ui-button:focus-visible, .ui-input:focus-visible, .ui-accordion-trigger:focus-visible {
+  outline: 3px solid var(--ui-ring);
+  outline-offset: 3px;
+}
+/* accordion.tsx: full-width trigger, trailing chevron, native details state. */
+.ui-accordion-trigger { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-radius: 6px; text-align: left; }
+.accordion-chevron { width: 20px; height: 20px; flex-shrink: 0; color: var(--ui-muted-foreground); transition: transform .2s; }
+details[open] > .ui-accordion-trigger > .accordion-chevron { transform: rotate(180deg); }
+/* input.tsx / textarea.tsx: neutral fields, rounded-md, clear focus ring. */
+.ui-input { width: 100%; min-width: 0; min-height: 48px; padding: 12px; border: 1px solid #7d899c; border-radius: 6px; background: var(--ui-card); color: var(--ui-card-foreground); font-size: 1rem; line-height: 1.75; box-shadow: 0 1px 2px rgb(24 28 36 / 4%); }
+.ui-input::placeholder { color: var(--ui-muted-foreground); opacity: 1; }
+.ui-input:disabled { cursor: not-allowed; opacity: .5; }
+@media (prefers-reduced-motion: reduce) {
+  .ui-button, .accordion-chevron { transition: none; }
+}

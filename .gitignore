@@ -1,0 +1,16 @@
+# Local drafts and unused assets from earlier designs
+human-agent.before-*.html
+assets/fonts/Fraunces-Variable.ttf
+assets/fonts/Fraunces-OFL.txt
+
+# Local system files, credentials and tool state
+.DS_Store
+._*
+.env
+.env.*
+!.env.example
+.codex/
+.agents/
+.aws/
+node_modules/
+*.log
