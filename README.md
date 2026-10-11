@@ -6,6 +6,12 @@
 
 Human-led, AI-assisted collaboration for music production, game audio, and AI applications.
 
+## 在线访问
+
+[打开能工智人网站](https://clxgame.github.io/Artisanal-Intelligence/)
+
+使用 GitHub Pages 发布。推送到 `main` 后，`.github/workflows/pages.yml` 会自动部署当前页面和静态资源，将 `human-agent.html` 作为网站首页，同时保留原文件访问路径。
+
 ## 本地查看
 
 下载或克隆仓库后，在浏览器中打开 `human-agent.html`。请保留 `assets/` 目录与 HTML 的相对位置，无需安装依赖或构建。
@@ -13,7 +19,8 @@ Human-led, AI-assisted collaboration for music production, game audio, and AI ap
 ## 页面内容
 
 - 工作方式与可讨论的协作场景。
-- 四档会员方案的参考报价与开始前需要确认的事项。
+- 年度协作计划：总量 1,000 小时（60,000 Token），本次预售其中的 100 小时（6,000 Token）；1 Token 对应 1 分钟协作时间。
+- 四档会员与 API 按需额度方案、咨询认领流程及参考报价；服务年度起止、个人额度有效期和跨年规则待确认。
 - 需求消息实时预览、复制与本地 TXT 保存。
 - 响应式布局、键盘焦点、减少动效和无脚本时的禁用保护。
 
@@ -47,3 +54,7 @@ node --check assets/human-agent.js
 ## 第三方资源
 
 页面使用 Creative Tim UI 的静态样式适配和 Geist 字体。相关来源与许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+## React 动态背景
+
+背景使用完整的用户提供 FLOW React 导出，位于 `assets/react-background/`，未裁剪引擎或改变动画参数。通过独立 iframe 接入，保留原组件的后台暂停与减少动态效果支持。React 运行时从 esm.sh 加载，需要联网；建议通过本地 HTTP 服务查看页面。

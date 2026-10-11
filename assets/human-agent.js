@@ -65,10 +65,10 @@
       }
 
       const currency = new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 2 });
-      const planKeys = ['single', 'multi', 'ongoing'];
+      const planKeys = ['single', 'multi', 'ongoing', 'api'];
       const plans = new Map();
       const cards = [...document.querySelectorAll('article.time-plan[data-plan]')];
-      if (cards.length !== planKeys.length) throw new Error('Expected three time plans.');
+      if (cards.length !== planKeys.length) throw new Error('Expected four fixed quota plans.');
       for (const key of planKeys) {
         const matching = cards.filter(card => card.dataset.plan === key);
         if (matching.length !== 1) throw new Error('Missing or duplicate time plan.');
@@ -78,7 +78,8 @@
         const rawHours = card.querySelector('[data-plan-hours]')?.textContent.trim();
         const hoursMatch = rawHours?.match(/^(\d+(?:\.\d+)?)\s*(?:小时|h)?$/i);
         const rate = card.querySelector('[data-plan-rate]');
-        if (!name || !rawPrice || !/^\d+(?:\.\d{1,2})?$/.test(rawPrice) || !hoursMatch || !rate) {
+        const quota = card.querySelector('[data-plan-tokens]');
+        if (!name || !rawPrice || !/^\d+(?:\.\d{1,2})?$/.test(rawPrice) || !hoursMatch || !rate || !quota) {
           throw new Error('Invalid time plan data.');
         }
         const price = Number(rawPrice);
@@ -86,7 +87,9 @@
         if (!Number.isFinite(price) || price <= 0 || !Number.isFinite(hours) || hours <= 0) {
           throw new Error('Time plan values must be positive numbers.');
         }
-        plans.set(key, { name, price, hours, rate });
+        const tokens = hours * 60;
+        quota.textContent = currency.format(tokens);
+        plans.set(key, { name, price, hours, tokens, rate });
       }
       if (!choices.length || choices.some(button => !plans.has(button.dataset.planChoice) && button.dataset.planChoice !== 'custom')) {
         throw new Error('Unknown time plan button.');
@@ -98,12 +101,12 @@
       for (const [key, plan] of plans) {
         const option = document.createElement('option');
         option.value = key;
-        option.textContent = `${plan.name} · ${plan.hours} 小时 · ¥${currency.format(plan.price)}`;
+        option.textContent = `${plan.name} · ${currency.format(plan.tokens)} Token · ¥${currency.format(plan.price)}`;
         options.append(option);
       }
       const customOption = document.createElement('option');
       customOption.value = 'custom';
-      customOption.textContent = '超级会员 · 范围与报价待沟通';
+      customOption.textContent = '超级会员 · 定制额度与报价待沟通';
       options.append(customOption);
       tier.append(options);
       for (const plan of plans.values()) {
@@ -118,9 +121,9 @@
 
       function chosenPlanDescription() {
         const plan = plans.get(tier.value);
-        if (plan) return `${plan.name}（${plan.hours} 小时，¥${currency.format(plan.price)}；以沟通确认的范围和安排为准）`;
-        if (tier.value === 'custom') return '超级会员（范围、时长与报价待沟通）';
-        return '先确认需求，再选择时间方案';
+        if (plan) return `${plan.name}（${currency.format(plan.tokens)} Token，对应 ${plan.hours} 小时协作，¥${currency.format(plan.price)}；以沟通确认的范围和安排为准）`;
+        if (tier.value === 'custom') return '超级会员（定制额度、范围与报价待沟通）';
+        return '先确认需求，再选择协作额度';
       }
 
       function buildMessage() {
@@ -133,7 +136,7 @@
           `方便交流的时间：${availability.value.trim() || '待沟通确认'}`,
           '',
           '以上是需求意向，请先帮我判断是否适合，再确认协作范围、费用与时间。',
-          '这条消息不代表已预约、已付款或已锁定时段。'
+          '这条消息不代表已认领额度、已付款或已锁定时段。'
         ].join('\n');
       }
 
@@ -155,10 +158,10 @@
         choices.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.planChoice === tier.value)));
         const plan = plans.get(tier.value);
         const note = plan
-          ? `当前意向：${plan.name}，${plan.hours} 小时，¥${currency.format(plan.price)}。具体安排需另行确认。`
+          ? `当前意向：${plan.name}，${currency.format(plan.tokens)} Token（${plan.hours} 小时），¥${currency.format(plan.price)}。认领与预约安排需另行确认。`
           : tier.value === 'custom'
-            ? '当前意向：超级会员。范围、时长与报价需另行沟通。'
-            : '先描述需求，再决定是否协作及选择哪档会员方案。';
+            ? '当前意向：超级会员。定制额度、范围与报价需另行沟通。'
+            : '先描述需求，再决定是否协作及选择哪档额度方案。';
         if (selectedNote.textContent !== note) selectedNote.textContent = note;
         if (lastActionMessage !== null && lastActionMessage !== message) {
           status.textContent = '内容已更新，可重新复制或保存。页面不会自动发送消息。';
