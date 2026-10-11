@@ -16,3 +16,15 @@ These are static HTML/CSS adaptations in `assets/creative-tim-ui.css` and `human
 ## Geist
 
 Geist variable font is self-hosted in `assets/fonts/Geist-Variable.ttf`. SIL Open Font License is included at `assets/fonts/Geist-OFL.txt`. Source: https://github.com/google/fonts/tree/main/ofl/geist
+
+## Lobe Icons
+
+MODEL table icons are from [Lobe Icons](https://github.com/lobehub/lobe-icons), `@lobehub/icons-static-svg` version `1.95.1`: `openai.svg`, `claude-color.svg`, `deepseek-color.svg`, and `gemini-color.svg`. SVGs are self-hosted in `assets/icons/`. The upstream MIT license is included at `assets/licenses/lobe-icons-LICENSE`.
+
+## MCP software icons
+
+Ableton Live, Logic Pro, and REAPER icons were extracted from the locally installed applications for product identification. These brand assets remain the property of their respective owners.
+
+Unreal Engine and Wwise SVGs are sourced from [Simple Icons](https://github.com/simple-icons/simple-icons), npm major version 15 (`unrealengine.svg`, `wwise.svg`), distributed under CC0. Brand trademarks belong to their respective owners. Display does not imply endorsement or an active integration.
+
+Additional MCP icons: VS Code, Cursor, Notion, Obsidian, and OBS Studio were extracted from locally installed applications for product identification. Codex uses `codex.svg` from `@lobehub/icons-static-svg@1.95.1` (MIT; license above). GitHub uses `github.svg` from Simple Icons major version 15 (CC0). Brand assets and trademarks belong to their respective owners.

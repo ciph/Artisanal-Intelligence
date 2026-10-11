@@ -38,3 +38,15 @@
 浏览器安全策略此前明确拒绝 `file://` 访问；未使用服务器或其他浏览器表面绕过。因此未验证真实渲染、手机断行、缩放、真实剪贴板权限或下载完成。
 
 本地历史副本由 `.gitignore` 排除，不属于公开仓库内容。
+
+
+## MODEL 列表更新（2026-10-11）
+
+表格合并名称和版本为模型列，每品牌三行，图标链接官网，用途为通用大模型。采用官方目录当前通用模型；DeepSeek 仅两款在用 API 模型，第三行 V4 Flash Vision Exp 标记已下线，不作为可用模型承诺。
+
+核对来源：
+- https://developers.openai.com/api/docs/models
+- https://platform.claude.com/docs/en/models/overview
+- https://api-docs.deepseek.com/zh-cn/updates/
+- https://api-docs.deepseek.com/quick_start/pricing/
+- https://ai.google.dev/gemini-api/docs/models?hl=en

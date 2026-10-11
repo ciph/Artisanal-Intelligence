@@ -1,6 +1,6 @@
-# Human-AI Hybrid Agent
+# 能工智人（Artisanal Intelligence）
 
-霄 · 真人 AI 智能体。面向音乐制作、游戏音频与 AI 应用的真人协作服务介绍页。
+能工智人 · 真人 AI 智能体。面向音乐制作、游戏音频与 AI 应用的真人协作服务介绍页。
 
 Human-led, AI-assisted collaboration for music production, game audio, and AI applications.
 
@@ -11,7 +11,7 @@ Human-led, AI-assisted collaboration for music production, game audio, and AI ap
 ## 页面内容
 
 - 工作方式与可讨论的协作场景。
-- 三档协作时间包的参考报价与开始前需要确认的事项。
+- 四档会员方案的参考报价与开始前需要确认的事项。
 - 需求消息实时预览、复制与本地 TXT 保存。
 - 响应式布局、键盘焦点、减少动效和无脚本时的禁用保护。
 

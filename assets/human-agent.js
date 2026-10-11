@@ -103,7 +103,7 @@
       }
       const customOption = document.createElement('option');
       customOption.value = 'custom';
-      customOption.textContent = '定制协作 · 范围与报价待沟通';
+      customOption.textContent = '超级会员 · 范围与报价待沟通';
       options.append(customOption);
       tier.append(options);
       for (const plan of plans.values()) {
@@ -119,7 +119,7 @@
       function chosenPlanDescription() {
         const plan = plans.get(tier.value);
         if (plan) return `${plan.name}（${plan.hours} 小时，¥${currency.format(plan.price)}；以沟通确认的范围和安排为准）`;
-        if (tier.value === 'custom') return '定制协作（范围、时长与报价待沟通）';
+        if (tier.value === 'custom') return '超级会员（范围、时长与报价待沟通）';
         return '先确认需求，再选择时间方案';
       }
 
@@ -157,8 +157,8 @@
         const note = plan
           ? `当前意向：${plan.name}，${plan.hours} 小时，¥${currency.format(plan.price)}。具体安排需另行确认。`
           : tier.value === 'custom'
-            ? '当前意向：定制协作。范围、时长与报价需另行沟通。'
-            : '先描述需求，再决定是否协作及选择哪种时间方案。';
+            ? '当前意向：超级会员。范围、时长与报价需另行沟通。'
+            : '先描述需求，再决定是否协作及选择哪档会员方案。';
         if (selectedNote.textContent !== note) selectedNote.textContent = note;
         if (lastActionMessage !== null && lastActionMessage !== message) {
           status.textContent = '内容已更新，可重新复制或保存。页面不会自动发送消息。';
