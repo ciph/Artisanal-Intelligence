@@ -1,5 +1,7 @@
 # 能工智人（Artisanal Intelligence）
 
+![能工智人：霄与 AI 伙伴组成的协作团队](assets/readme-banner.png)
+
 能工智人 · 真人 AI 智能体。面向音乐制作、游戏音频与 AI 应用的真人协作服务介绍页。
 
 Human-led, AI-assisted collaboration for music production, game audio, and AI applications.
