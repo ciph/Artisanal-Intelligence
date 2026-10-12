@@ -12,6 +12,7 @@
   <script src="assets/human-agent.js" defer></script>
   <script src="assets/agent-flow.js" defer></script>
   <script src="assets/token-tabs.js" defer></script>
+  <script src="assets/skill-tabs.js" defer></script>
 </head>
 <body id="top">
   <iframe class="react-background" src="assets/react-background/index.html" title="装饰性流动背景" aria-hidden="true" tabindex="-1"></iframe>
@@ -225,30 +226,104 @@
       <details class="chapter" id="skills" open>
         <summary class="chapter-toggle"><h2 class="chapter-title" lang="en">SKILLS</h2><svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="chapter-body">
-          <div class="skills-grid">
-            <article class="skill ui-card">
-              <div data-slot="card-header"><span class="card-kicker">创作与制作</span><h4>音乐制作</h4></div>
-              <div data-slot="card-content"><p>已有作品或片段，希望一起处理创作、编曲、音色或制作中的具体问题。</p><div class="possible-output"><h5>可约定的产出</h5><p>试听反馈、一个片段的修改示例，或下一轮制作建议。</p></div></div>
-              <div data-slot="card-footer"><a class="text-link" href="#connect" data-topic-choice="音乐制作">整理音乐制作需求 <span aria-hidden="true">↗</span></a></div>
-            </article>
-            <article class="skill ui-card">
-              <div data-slot="card-header"><span class="card-kicker">声音与交互</span><h4>游戏音频</h4></div>
-              <div data-slot="card-content"><p>正在制作游戏原型，需要处理交互音乐、Wwise / UE 接入或音频工作流问题。</p><div class="possible-output"><h5>可约定的产出</h5><p>问题排查记录、一个交互逻辑验证，或一份实现建议。</p></div></div>
-              <div data-slot="card-footer"><a class="text-link" href="#connect" data-topic-choice="游戏音频">整理游戏音频需求 <span aria-hidden="true">↗</span></a></div>
-            </article>
-            <article class="skill ui-card">
-              <div data-slot="card-header"><span class="card-kicker">想法与原型</span><h4>AI 开发</h4></div>
-              <div data-slot="card-content"><p>想验证网站、小工具、AI 应用或自动化流程，也可以带着现有代码中的问题来。</p><div class="possible-output"><h5>可约定的产出</h5><p>需求拆解、一段可运行的原型，或约定范围内的问题修复。</p></div></div>
-              <div data-slot="card-footer"><a class="text-link" href="#connect" data-topic-choice="AI 开发">整理 AI 开发需求 <span aria-hidden="true">↗</span></a></div>
-            </article>
+          <p class="skills-intro">选择一个方向，了解可以一起做什么，以及材料和成果如何使用。</p>
+          <div class="skills-browser">
+            <div class="skill-tabs" role="tablist" aria-label="选择服务方向" aria-orientation="vertical" hidden>
+              <button class="skill-tab" type="button" role="tab" id="skill-music-tab" aria-controls="skill-music" aria-selected="true">
+                <svg class="skill-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13 23V8l13-3v15M13 12l13-3"/><ellipse cx="9" cy="24" rx="4" ry="3"/><ellipse cx="22" cy="21" rx="4" ry="3"/></svg>
+                <span class="skill-tab-copy"><span class="skill-tab-name">音乐制作</span><span class="skill-tab-caption">创作与制作</span></span><span class="skill-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="skill-tab" type="button" role="tab" id="skill-game-tab" aria-controls="skill-game" aria-selected="false" tabindex="-1">
+                <svg class="skill-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 10h10c3 0 4 2 5 5l2 9c.7 3-2 4-4 2l-4-4h-8l-4 4c-2 2-4.7 1-4-2l2-9c1-3 2-5 5-5ZM10 14v6m-3-3h6M16 5v2m-5-3v2m10-2v2"/><circle cx="22" cy="15" r=".8"/><circle cx="24" cy="19" r=".8"/></svg>
+                <span class="skill-tab-copy"><span class="skill-tab-name">游戏音频</span><span class="skill-tab-caption">声音与交互</span></span><span class="skill-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="skill-tab" type="button" role="tab" id="skill-ai-tab" aria-controls="skill-ai" aria-selected="false" tabindex="-1">
+                <svg class="skill-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="m10 10-7 6 7 6m12-12 7 6-7 6M19 6l-6 20"/></svg>
+                <span class="skill-tab-copy"><span class="skill-tab-name">AI 开发</span><span class="skill-tab-caption">想法与原型</span></span><span class="skill-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="skill-tab" type="button" role="tab" id="skill-talk-tab" aria-controls="skill-talk" aria-selected="false" tabindex="-1">
+                <svg class="skill-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M27 15c0 6-5 10-11 10-2 0-4-.5-5-1.3L5 27l1.8-6C5 19.5 4 17.5 4 15 4 9 9 5 16 5s11 4 11 10Z"/><path d="M10 13h12m-12 5h8"/></svg>
+                <span class="skill-tab-copy"><span class="skill-tab-name">咨询交流</span><span class="skill-tab-caption">问题与思路</span></span><span class="skill-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+            </div>
+            <div class="skill-panels">
+              <article class="skill-panel" id="skill-music" aria-labelledby="skill-music-title">
+                <header class="skill-panel-heading"><div><p class="card-kicker">创作与制作</p><h3 id="skill-music-title">音乐制作</h3></div><span class="skill-confidential"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg>默认保密</span></header>
+                <p class="skill-description">从一个片段开始，一起处理创作、编曲、音色或制作中的具体问题。</p>
+                <section class="skill-deliverables" aria-labelledby="music-services-title"><h4 id="music-services-title">可约定的服务</h4><ul class="skill-service-list">
+                  <li><strong>试听与反馈</strong><span>梳理作品问题，整理下一轮制作建议。</span></li>
+                  <li><strong>创作与编曲</strong><span>围绕约定片段，讨论结构与编配，提供修改示例。</span></li>
+                  <li><strong>音色与制作</strong><span>处理具体声音问题，验证调整思路。</span></li>
+                </ul></section>
+                <section class="skill-permissions" aria-labelledby="music-permissions-title"><h4 id="music-permissions-title">保密与授权范围</h4><dl>
+                  <div><dt>默认保密</dt><dd>未发行作品、录音、分轨、工程文件，以及沟通和修改过程。</dd></div>
+                  <div><dt>成果使用</dt><dd>发行、商用、署名及是否交付分轨或工程文件，在预约时确认；按约使用无需重复授权。</dd></div>
+                  <div><dt>另行确认</dt><dd>将音频交给外部 AI 处理，或公开试听片段、制作过程与合作案例。</dd></div>
+                </dl></section>
+                <footer class="skill-panel-footer"><p>具体交付、积分、修改范围与排期，预约时确认。</p><a class="ui-button" href="#connect" data-topic-choice="音乐制作">整理音乐制作需求 <span aria-hidden="true">↗</span></a></footer>
+              </article>
+              <article class="skill-panel" id="skill-game" aria-labelledby="skill-game-title">
+                <header class="skill-panel-heading"><div><p class="card-kicker">声音与交互</p><h3 id="skill-game-title">游戏音频</h3></div><span class="skill-confidential"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg>默认保密</span></header>
+                <p class="skill-description">围绕游戏原型，处理交互音乐、Wwise / UE 接入与音频工作流问题。</p>
+                <section class="skill-deliverables" aria-labelledby="game-services-title"><h4 id="game-services-title">可约定的服务</h4><ul class="skill-service-list">
+                  <li><strong>交互音乐梳理</strong><span>讨论状态与切换逻辑，整理实现建议。</span></li>
+                  <li><strong>音频接入排查</strong><span>定位 Wwise / UE 接入问题，留下排查记录。</span></li>
+                  <li><strong>工作流验证</strong><span>验证一个约定的交互逻辑或音频流程。</span></li>
+                </ul></section>
+                <section class="skill-permissions" aria-labelledby="game-permissions-title"><h4 id="game-permissions-title">保密与授权范围</h4><dl>
+                  <div><dt>默认保密</dt><dd>未公开玩法、版本构建、音频素材、工程及实现细节。</dd></div>
+                  <div><dt>成果使用</dt><dd>游戏发行、宣传片及其他使用范围，在预约时确认；游戏上线不自动公开工程与制作过程。</dd></div>
+                  <div><dt>另行确认</dt><dd>将项目材料交给外部 AI 或协作者处理，或展示游戏画面、工程与合作案例。</dd></div>
+                </dl></section>
+                <footer class="skill-panel-footer"><p>具体交付、积分、修改范围与排期，预约时确认。</p><a class="ui-button" href="#connect" data-topic-choice="游戏音频">整理游戏音频需求 <span aria-hidden="true">↗</span></a></footer>
+              </article>
+              <article class="skill-panel" id="skill-ai" aria-labelledby="skill-ai-title">
+                <header class="skill-panel-heading"><div><p class="card-kicker">想法与原型</p><h3 id="skill-ai-title">AI 开发</h3></div><span class="skill-confidential"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg>默认保密</span></header>
+                <p class="skill-description">验证网站、小工具、AI 应用或自动化流程，也可以带着现有代码中的问题来。</p>
+                <section class="skill-deliverables" aria-labelledby="ai-services-title"><h4 id="ai-services-title">可约定的服务</h4><ul class="skill-service-list">
+                  <li><strong>需求拆解</strong><span>明确目标、使用场景与本次实现范围。</span></li>
+                  <li><strong>原型搭建</strong><span>围绕核心流程，交付一段可运行的原型。</span></li>
+                  <li><strong>问题修复</strong><span>排查并修复约定范围内的代码或流程问题。</span></li>
+                </ul></section>
+                <section class="skill-permissions" aria-labelledby="ai-permissions-title"><h4 id="ai-permissions-title">保密与授权范围</h4><dl>
+                  <div><dt>默认保密</dt><dd>私有代码、产品需求、业务数据、账号权限与运行记录。提交材料前请去除无关数据和密钥。</dd></div>
+                  <div><dt>成果使用</dt><dd>代码使用、部署范围及第三方依赖，在预约时确认；交付代码不等于允许公开仓库或业务数据。</dd></div>
+                  <div><dt>另行确认</dt><dd>外部模型、云服务或协作者接触哪些代码与数据，以及开源发布、演示与案例展示。</dd></div>
+                </dl></section>
+                <footer class="skill-panel-footer"><p>具体交付、积分、修改范围与排期，预约时确认。</p><a class="ui-button" href="#connect" data-topic-choice="AI 开发">整理 AI 开发需求 <span aria-hidden="true">↗</span></a></footer>
+              </article>
+              <article class="skill-panel" id="skill-talk" aria-labelledby="skill-talk-title">
+                <header class="skill-panel-heading"><div><p class="card-kicker">问题与思路</p><h3 id="skill-talk-title">咨询交流</h3></div><span class="skill-confidential"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg>默认保密</span></header>
+                <p class="skill-description">聊创作、工具、职业，或一个刚冒出来的念头。先确定一个问题，再一起梳理。</p>
+                <section class="skill-deliverables" aria-labelledby="talk-services-title"><h4 id="talk-services-title">可约定的服务</h4><ul class="skill-service-list">
+                  <li><strong>问题梳理</strong><span>说明现状和卡点，明确真正想推进的事情。</span></li>
+                  <li><strong>思路讨论</strong><span>围绕具体话题，讨论选项与下一步。</span></li>
+                  <li><strong>交流整理</strong><span>是否提供纪要或行动建议，在开始前确认。</span></li>
+                </ul></section>
+                <section class="skill-permissions" aria-labelledby="talk-permissions-title"><h4 id="talk-permissions-title">保密与授权范围</h4><dl>
+                  <div><dt>默认保密</dt><dd>咨询问题、个人背景、交流记录及整理结果，未成交的咨询也同样保密。</dd></div>
+                  <div><dt>成果使用</dt><dd>讨论与整理用于本次约定的问题；如需对外分享纪要、原话或截图，另行确认范围。</dd></div>
+                  <div><dt>另行确认</dt><dd>录音、自动转写、提交外部 AI，以及引用评价或展示匿名咨询案例。</dd></div>
+                </dl></section>
+                <footer class="skill-panel-footer"><p>按具体咨询服务确认积分与排期，不预设作品交付。</p><a class="ui-button" href="#connect" data-topic-choice="闲聊与想法">整理想聊的话题 <span aria-hidden="true">↗</span></a></footer>
+              </article>
+            </div>
           </div>
-          <div class="conversation-note"><div><h4>也可以，先聊一个想法。</h4><p>聊创作、工具、职业，或一个刚冒出来的念头。这类交流以讨论和梳理为主，不预设作品交付；是否计费及如何计费，也会先说明。</p></div><a class="text-link" href="#connect" data-topic-choice="闲聊与想法">整理想聊的话题 <span aria-hidden="true">↗</span></a></div>
+          <details class="skill-common-rules">
+            <summary><span>所有 Skill 的共同约定<span class="skill-common-summary">双方默认保密 · 公开需双方同意</span></span><svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="skill-common-copy">
+              <p>保密从首次咨询开始，不取决于是否成交、付费或会员等级，合作结束后继续有效。客户在事先约定范围内使用或发布成品，无需重复申请；案例展示、评价引用及合作关系披露另行取得双方明确同意，匿名或打码也不例外。</p>
+              <p>AI 或第三方处理材料前，确认具体工具、材料范围、用途和留存方式；允许处理不等于允许公开，也不默认允许训练模型或用于其他客户。工具或用途变更时重新确认，双方同意不能代替必要的第三方授权。</p>
+              <p>收集材料前说明保存期限及查询、删除、撤回授权的联系渠道。仅保留必要材料，不承诺清除第三方转载；保密约定不妨碍依法向有权机构提供必要证据或维权。</p>
+              <p>本页用于了解服务。浏览、选择 Skill 或整理需求不代表授权、预约或扣除积分。</p>
+            </div>
+          </details>
           <section class="process" aria-labelledby="process-title">
             <h3 id="process-title">一次协作，怎样开始</h3>
             <ol class="process-list">
               <li><span class="step-number" aria-hidden="true">01</span><div><h4>带来问题与现有材料</h4><p>说清当前情况、希望推进的一步，以及时间或预算限制。</p></div></li>
-              <li><span class="step-number" aria-hidden="true">02</span><div><h4>确认范围、产出和费用</h4><p>判断是否适合，再约定协作方式、计时规则和本次交付内容。</p></div></li>
-              <li><span class="step-number" aria-hidden="true">03</span><div><h4>一起执行，检查结果</h4><p>按约定推进和核对用时，整理产出；需要继续时，再确认下一步。</p></div></li>
+              <li><span class="step-number" aria-hidden="true">02</span><div><h4>确认服务与预约</h4><p>约定交付、积分、排期、成果用途和材料处理方式，再开始协作。</p></div></li>
+              <li><span class="step-number" aria-hidden="true">03</span><div><h4>一起执行，检查结果</h4><p>按约定检查交付并核对积分；需要扩大范围时，再确认下一步。</p></div></li>
             </ol>
           </section>
         </div>
@@ -303,7 +378,7 @@
             <p class="token-tagline">认领额度，预约协作，留下成果。</p>
             <p class="token-supply"><span>年度总额度</span><strong>60,000 <span lang="en">Token</span></strong></p>
             <p class="token-presale token-tagline"><strong>本次预售 100 小时 · 6,000 Token</strong></p>
-            <p class="token-definition">1 Token = 1 分钟协作时间 · 60 Token = 1 小时</p>
+            <p class="token-definition">1 Token = 1 分钟标准时间价值 · 服务按标价兑换</p>
             <p class="token-value">从音乐制作、游戏音频到 AI 应用，由我参与理解、判断与执行，结合 AI 和专业工具，一起推进你的目标。</p>
           </div>
           <div class="token-tabs" role="tablist" aria-label="协作额度方案" hidden>
@@ -316,7 +391,7 @@
                 <div data-slot="card-header"><h4 id="single-title" data-plan-name>基础会员</h4><p class="plan-kind">从一次共同动手开始</p></div>
                 <div data-slot="card-content">
                   <p class="plan-quota"><span data-plan-tokens>60</span> <span>Token</span></p>
-                  <p class="plan-hours">对应 <span data-plan-hours>1</span> 小时协作</p>
+                  <p class="plan-hours">时间价值 <span data-plan-hours>1</span> 小时</p>
                   <p class="plan-price"><span class="sr-only">额度包参考总价：</span><span class="currency">¥</span><span data-plan-price>500</span></p>
                   <p class="plan-rate" data-plan-rate></p>
                   <p class="plan-description">带来一个具体问题。在约定范围内，一起梳理思路、尝试方法，留下可继续推进的记录或初步成果。</p>
@@ -327,7 +402,7 @@
                 <div data-slot="card-header"><h4 id="multi-title" data-plan-name>标准会员</h4><p class="plan-kind">给尝试与迭代留出空间</p></div>
                 <div data-slot="card-content">
                   <p class="plan-quota"><span data-plan-tokens>480</span> <span>Token</span></p>
-                  <p class="plan-hours">对应 <span data-plan-hours>8</span> 小时协作</p>
+                  <p class="plan-hours">时间价值 <span data-plan-hours>8</span> 小时</p>
                   <p class="plan-price"><span class="sr-only">额度包参考总价：</span><span class="currency">¥</span><span data-plan-price>3,000</span></p>
                   <p class="plan-rate" data-plan-rate></p>
                   <p class="plan-description">围绕一段作品、一个原型或一项任务，分次讨论、动手验证与调整，让想法逐步成形。</p>
@@ -338,7 +413,7 @@
                 <div data-slot="card-header"><h4 id="ongoing-title" data-plan-name>高级会员</h4><p class="plan-kind">为阶段目标持续投入</p></div>
                 <div data-slot="card-content">
                   <p class="plan-quota"><span data-plan-tokens>1,800</span> <span>Token</span></p>
-                  <p class="plan-hours">对应 <span data-plan-hours>30</span> 小时协作</p>
+                  <p class="plan-hours">时间价值 <span data-plan-hours>30</span> 小时</p>
                   <p class="plan-price"><span class="sr-only">额度包参考总价：</span><span class="currency">¥</span><span data-plan-price>10,000</span></p>
                   <p class="plan-rate" data-plan-rate></p>
                   <p class="plan-description">适合需要连续推进的项目。按阶段安排协作，持续处理关键问题，并在每一阶段核对进展与下一步。</p>
@@ -352,7 +427,7 @@
                   <p class="plan-hours">Token 数量与协作安排共同确认</p>
                   <p class="plan-price">定制报价</p>
                   <p class="plan-rate">按目标、范围与投入确认</p>
-                  <p class="plan-description">适合长期或复杂项目。先拆分阶段任务，再共同确定所需额度、协作节奏与交付范围。</p>
+                  <p class="plan-description">适合长期或复杂项目。可兑换 Skill 服务，也可预约按时间计价的直接支持；额度、范围与排期共同确认。</p>
                 </div>
                 <div data-slot="card-footer"><button class="ui-button tier-button" type="button" data-plan-choice="custom" aria-pressed="false" disabled>咨询定制 <span class="sr-only">超级会员额度</span><span aria-hidden="true">↗</span></button></div>
               </article>
@@ -362,10 +437,10 @@
             <article class="api-plan time-plan ui-card" data-plan="api" aria-labelledby="api-plan-title">
               <div data-slot="card-header"><h4 id="api-plan-title" data-plan-name>API</h4><p class="plan-kind">按需认领，围绕具体任务协作</p></div>
               <div data-slot="card-content">
-                <p class="plan-hours">对应 <span data-plan-hours>1</span> 小时协作</p>
+                <p class="plan-hours">时间价值 <span data-plan-hours>1</span> 小时</p>
                 <p class="plan-price"><span class="sr-only">参考报价：</span><span class="currency">¥</span><span data-plan-price>600</span><span class="api-price-unit">/ <span data-plan-tokens>60</span> Token</span></p>
                 <p class="plan-rate" data-plan-rate></p>
-                <p class="plan-description">从一次明确的需求开始，按需约定协作额度。这里的 Token 按我的协作时间计算；涉及的工具与额外费用在开始前确认。</p>
+                <p class="plan-description">从一次明确的需求开始，按需约定协作额度。零售积分 60 Token 起购，一次到账，按具体 Skill 服务兑换；涉及的工具与额外费用在开始前确认。</p>
               </div>
               <div data-slot="card-footer"><button class="ui-button tier-button" type="button" data-plan-choice="api" aria-pressed="false" disabled>咨询 API 额度 <span aria-hidden="true">↗</span></button></div>
             </article>
@@ -374,18 +449,18 @@
           <div class="token-process" aria-labelledby="token-process-title">
             <h3 id="token-process-title">从认领到协作</h3>
             <ol class="process-list">
-              <li><span class="step-number" aria-hidden="true">01</span><div><h4>咨询认领</h4><p>先聊目标，再确认额度与费用。认领时记录所属服务年度和 Token 数量。</p></div></li>
-              <li><span class="step-number" aria-hidden="true">02</span><div><h4>预约协作</h4><p>每次共同确认时间、任务范围和预计用量，再开始动手。</p></div></li>
-              <li><span class="step-number" aria-hidden="true">03</span><div><h4>核对用量</h4><p>按约定计时扣除 Token，记录本次产出、已用额度与剩余额度。</p></div></li>
+              <li><span class="step-number" aria-hidden="true">01</span><div><h4>咨询认领</h4><p>先聊目标，再确认额度与费用。套餐积分一次到账，未用积分可累计；有效期与跨年规则另行确认。</p></div></li>
+              <li><span class="step-number" aria-hidden="true">02</span><div><h4>预约协作</h4><p>选择 Skill 服务，确认交付、积分和排期，预约后冻结对应积分。</p></div></li>
+              <li><span class="step-number" aria-hidden="true">03</span><div><h4>核对用量</h4><p>完成交付后按服务标价扣除 Token，记录产出与余额；超级会员按时预约的支持按约定时长计价。</p></div></li>
             </ol>
           </div>
           <div class="rules" id="rules">
-            <div class="rules-intro"><h3>开始前，一起确认</h3><p>Token 用于记录可兑换的协作时间。服务年度、额度有效期与预约规则会在正式认领前共同确认，并留下双方认可的文字记录。</p></div>
+            <div class="rules-intro"><h3>开始前，一起确认</h3><p>Token 是兑换服务的积分。普通用户及普通会员按具体 Skill 服务兑换；超级会员还可预约按时计价的支持。有效期与预约规则在正式认领前确认，并留下文字记录。</p></div>
             <div class="rule-list">
               <details><summary>总量、预售额度与个人余额是什么关系？<svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>每个服务年度计划提供 1,000 小时，即 60,000 Token。本次从中预售 100 小时，即 6,000 Token，占年度总量的 10%。各档会员与 API 共享本次预售额度；个人余额按认领及使用记录核对。服务年度的起止日期、个人额度有效期与跨年处理尚待确认，年度总量不表示个人余额会在年底自动清零。</p></details>
-              <details><summary>Token 怎样扣除与记录？<svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>1 Token 对应 1 分钟协作时间。开始前约定准备、交流、异步执行和等待分别是否计时，以及最小计费单位；结束后按记录核对扣除数量和余额。预计超出本次约定用量时，先确认是否继续。扣除、退回与调整均需留下记录。</p></details>
-              <details><summary>预约、改期和未用额度怎么办？<svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>持有额度后仍需共同确认可预约时段。改期、取消、退款、未用额度及跨年处理的统一规则尚未发布，会在认领前明确。页面中的方案选择只用于咨询，不会锁定额度或预约。</p></details>
-              <details><summary>AI 工具和其他费用包含在内吗？<svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>这里的 Token 用于真人主导的协作时间。第三方账号、官方订阅和模型调用额度不随之提供。具体工具、素材、部署等费用是否包含，会随协作范围一并说明；另有费用时，先确认再产生。</p></details>
+              <details><summary>Token 怎样扣除与记录？<svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>1 Token 对应 1 分钟标准时间价值，最小计价单位为 1 Token；零售 60 Token 起购。普通兑换按 Skill 服务标价扣分，不因实际耗时多退少补。超级会员预约的按时支持按约定时长计价。超出服务范围时先确认报价，扣除、退回与调整均留下记录。</p></details>
+              <details><summary>预约、改期和未用额度怎么办？<svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>积分一次到账，未用积分可累计，不按月释放；持有积分后仍需确认可预约时段。改期、取消、退款、有效期及跨年处理会在认领前明确。页面中的方案选择只用于咨询，不会锁定额度或预约。</p></details>
+              <details><summary>AI 工具和其他费用包含在内吗？<svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>这里的 Token 用于兑换真人主导的服务。第三方账号、官方订阅和模型调用额度不随之提供。具体工具、素材、部署等费用是否包含，会随协作范围一并说明；另有费用时，先确认再产生。</p></details>
               <details><summary>会交付什么，资料如何使用？<svg class="icon accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><p>共同确认文件、记录或原型等具体产出，以及交付格式、修改范围、后续支持和成果归属。需要把资料交给第三方 AI 工具处理时，先说明工具、资料范围与使用方式，再确认是否采用。</p></details>
             </div>
           </div>

@@ -113,7 +113,7 @@
         const hourlyRate = plan.price / plan.hours;
         const cents = hourlyRate * 100;
         const rounded = Math.abs(cents - Math.round(cents)) > Number.EPSILON * Math.max(1, Math.abs(cents)) * 4;
-        plan.rate.textContent = `折合${rounded ? '约' : ''} ¥${currency.format(hourlyRate)} / 小时`;
+        plan.rate.textContent = `时间价值折合${rounded ? '约' : ''} ¥${currency.format(hourlyRate)} / 小时`;
       }
 
       let busy = false;
@@ -121,7 +121,7 @@
 
       function chosenPlanDescription() {
         const plan = plans.get(tier.value);
-        if (plan) return `${plan.name}（${currency.format(plan.tokens)} Token，对应 ${plan.hours} 小时协作，¥${currency.format(plan.price)}；以沟通确认的范围和安排为准）`;
+        if (plan) return `${plan.name}（${currency.format(plan.tokens)} Token，相当于 ${plan.hours} 小时标准时间价值，¥${currency.format(plan.price)}；以沟通确认的范围和安排为准）`;
         if (tier.value === 'custom') return '超级会员（定制额度、范围与报价待沟通）';
         return '先确认需求，再选择协作额度';
       }
@@ -158,7 +158,7 @@
         choices.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.planChoice === tier.value)));
         const plan = plans.get(tier.value);
         const note = plan
-          ? `当前意向：${plan.name}，${currency.format(plan.tokens)} Token（${plan.hours} 小时），¥${currency.format(plan.price)}。认领与预约安排需另行确认。`
+          ? `当前意向：${plan.name}，${currency.format(plan.tokens)} Token（${plan.hours} 小时标准时间价值），¥${currency.format(plan.price)}。认领与预约安排需另行确认。`
           : tier.value === 'custom'
             ? '当前意向：超级会员。定制额度、范围与报价需另行沟通。'
             : '先描述需求，再决定是否协作及选择哪档额度方案。';
