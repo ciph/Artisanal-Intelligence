@@ -8,7 +8,7 @@ Human-led, AI-assisted collaboration for music production, game audio, and AI ap
 
 ## 在线访问
 
-[打开能工智人网站](https://clxgame.github.io/Artisanal-Intelligence/)
+[打开能工智人网站](https://ciph.github.io/Artisanal-Intelligence/)
 
 使用 GitHub Pages 发布。推送到 `main` 后，`.github/workflows/pages.yml` 会自动部署当前页面和静态资源，将 `human-agent.html` 作为网站首页，同时保留原文件访问路径。
 
